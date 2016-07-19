@@ -1,4 +1,5 @@
-<form class="form-horizontal margin-bottom-40" role="form" method="POST" action="/bulletin/{{$state}}" enctype="multipart/form-data">
+<form class="form-horizontal margin-bottom-40" role="form" method="POST" action="/bulletin/{{$state}}"
+      enctype="multipart/form-data">
     {!! csrf_field() !!}
     <div class="form-group form-md-line-input">
         <label for="title" class="col-md-2 control-label">{{trans('main.add_title')}}</label>
@@ -42,7 +43,11 @@
     <div class="form-group form-md-line-input">
         <label for="file" class="col-md-2 control-label">Опубликовать</label>
         <div class="col-md-4">
-            {{ Form::checkbox('status', $bulletin->status) }}
+            @if (isset($bulletin->status))
+                {{ Form::checkbox('status', $bulletin->status or 0) }}
+            @else
+                {{ Form::checkbox('status', 0) }}
+            @endif
         </div>
     </div>
     @if (count($errors) > 0)
@@ -57,7 +62,7 @@
 
     <div class="col-md-offset-2 col-md-10">
         @if ($state == 'save')
-            <input type="hidden" name="id" value="{{$bulletin->id}}"/>
+            <input type="hidden" name="id" value="{{$bulletin->id or ''}}"/>
             <button type="submit" class="btn blue">{{trans('main.edit')}}</button>
         @else
             <button type="submit" class="btn blue">{{trans('main.add')}}</button>
