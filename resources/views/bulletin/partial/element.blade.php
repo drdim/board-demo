@@ -12,10 +12,12 @@
                         <a class="dt-button buttons-print btn dark btn-outline" tabindex="0"
                            aria-controls="sample_1" href="/bulletin/{{$row->id}}/edit">
                             <span>{{trans('main.edit')}}</span></a>
-                        <a class="dt-button buttons-pdf buttons-html5 btn green btn-outline" tabindex="0"
-                           aria-controls="sample_1"
-                           href="/bulletin/{{$row->id}}/publish"><span>{{trans('main.publish')}}</span></a>
-                        <a
+                            @if ($row->status != 1)
+                            <a class="dt-button buttons-pdf buttons-html5 btn green btn-outline" tabindex="0"
+                               aria-controls="sample_1"
+                               href="/bulletin/{{$row->id}}/publish"><span>{{trans('main.publish')}}</span></a>
+                            @endif
+                            <a
                                 class="dt-button buttons-csv buttons-html5 btn purple btn-outline" tabindex="0"
                                 aria-controls="sample_1"
                                 href="/bulletin/{{$row->id}}/close"><span>{{trans('main.close')}}</span></a>

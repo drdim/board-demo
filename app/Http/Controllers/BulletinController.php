@@ -126,4 +126,14 @@ class BulletinController extends Controller
         }
     }
 
+    public function publish($id){
+        if($id){
+            $bulletin = Bulletin::find($id);
+            $bulletin->status = 1;
+            if($bulletin->save()){
+                return redirect('/')->with('message', trans('main.published'));
+            }
+        }
+    }
+
 }
